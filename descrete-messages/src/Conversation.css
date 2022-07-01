@@ -1,0 +1,33 @@
+.chat-box {
+  border: 1px solid black;
+  width: 600px;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+}
+.chat-box1 {
+  border: 1px solid black;
+  width: 300px;
+}
+.chat-box2 {
+  border: 1px solid black;
+  width: 300px;
+}
+
+.chat {
+  display: grid;
+  justify-content: center;
+}
+
+.right {
+  justify-content: right;
+  text-align: left;
+}
+
+.chat-box1 .right {
+  visibility: hidden;
+}
+
+.chat-box2 .left {
+  color: white;
+}
