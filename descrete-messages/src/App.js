@@ -11,23 +11,36 @@ import Sessions from './components/Sessions'
 
 function App() {
 
-  const [loggedInUser, setLoggedInUser] = useState('')
+  const [loggedInUsername, setLoggedInUser] = useState('')
+  const [loggedInUserId, setLoggedInUserId] = useState('')
   const [loggedIn, setLoggedInStatus] = useState(false)
   const friend = 'Marcus'
 
   const login = (event) => {
     event.preventDefault()
-    const found = true
     const userName = event.target.userName.value
-    const password = event.target.password.value
-    
-
     //check if log in correct then: set found = true/false
 
-    if (found) {
-      setLoggedInStatus(true)
-      setLoggedInUser(userName)
-    }
+    event.preventDefault()
+    const form = event.target
+    const data = Object.fromEntries(new FormData(form))
+
+    fetch('/api/sessions', {
+      method: "POST",
+      headers: {'Content-Type' : 'application/json'},
+      body: JSON.stringify(data)
+    })
+      .then(res => res.json())
+      .then(res => {
+        if (res.correctLogin) {
+          setLoggedInStatus(true)
+          setLoggedInUser(userName)
+          setLoggedInUserId(res.userId)
+        }
+        else {
+          alert('Incorrect username or password')
+        }
+      })
   }
 
   const logout = () => {
@@ -37,9 +50,28 @@ function App() {
 
   const register = (event) => {
     event.preventDefault()
-    const found = true
-    const data = event.target
-  }
+    const form = event.target
+    const data = Object.fromEntries(new FormData(form))
+    console.log(JSON.stringify(data))
+
+    fetch('/api/users', {
+        method: 'POST',
+        headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+           },
+        body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(res => {
+        if (res.error) {
+            console.log(res.error)
+        } else {
+            console.log(res)
+        }
+    })
+}
+
   return (
     <div className="App">
       <section className='left-col'>
@@ -47,13 +79,13 @@ function App() {
         <SearchBar className='search-bar'/>
         <FriendsList className='friends-list'/>
       </section>
-      <section className='middle-col'><Conversation 
-      friendName={friend}
-      loggedInUser={loggedInUser}/>
+      <section className='middle-col'>
+        <Conversation 
+        friendName={friend}
+        loggedInUser={loggedInUsername}/>
       </section>
       <section className='right-col'>
         <Sessions loggedIn={loggedIn} login={login} logout={logout} register={register}/>
-        
       </section>
     </div>
   );

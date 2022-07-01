@@ -9,6 +9,7 @@ const Conversation = ({friendName, loggedInUser}) => {
   //input for messages at the bottom
 
   const [sentMessages, addSentMessages] = useState([])
+  const [typedMessage, setTypedMessage] = useState('')
 
 
 
@@ -16,10 +17,16 @@ const Conversation = ({friendName, loggedInUser}) => {
     event.preventDefault()
     
     addSentMessages([...sentMessages, {message: event.target.message.value, sender: loggedInUser, side: 'right'}])
+    setTypedMessage('')
   }
 
   const retrieveMessages = () => {
 
+  }
+
+  const handleTypedMessages = (event) => {
+    const message = event.target.value
+    setTypedMessage(message)
   }
 
   return (
@@ -27,18 +34,18 @@ const Conversation = ({friendName, loggedInUser}) => {
       <h2>{friendName}</h2>
       <div className='chat-box'>
         <div className="chat-box1">
-          <ul className='chat-stream'>{sentMessages.map(message => {
-          return <li className={message.side}>{message.message} from {message.sender}</li>
+          <ul className='chat-stream'>{sentMessages.map((message, index) => {
+          return <li key={index} className={message.side}>{message.message} from {message.sender}</li>
         })}</ul>
         </div>
         <div className="chat-box2">
-          <ul className='chat-stream'>{sentMessages.map(message => {
-          return <li className={message.side}>{message.message} from {message.sender}</li>
+          <ul className='chat-stream'>{sentMessages.map((message, index) => {
+          return <li key={index} className={message.side}>{message.message} from {message.sender}</li>
         })}</ul>
         </div>
       </div>
       <form action="" onSubmit={sendMessage}>
-        <input type="text" name='message'/>
+        <input type="text" name='message' onChange={handleTypedMessages} value={typedMessage}/>
         <button>Send</button>
       </form>
     </section>

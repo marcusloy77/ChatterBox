@@ -7,19 +7,28 @@ const Register = ({loggedIn, register}) => {
     return (
       <>
         <h3>Register</h3>
-        <form action="" onSubmit={register}>
-          <div><label htmlFor="">Username:</label>
-          <input type="text" name='userName' />
-          </div>
-          <div>
-          <label htmlFor="">Email: </label>
-          <input type="text" name='email' />
-          </div>
-          <div>
-          <label htmlFor="">Password:</label>
-          <input type="password" name='password'/>
-          </div>
-          <button>Register</button>
+        <form onSubmit={register}>
+            <fieldset>
+                <label>First Name:</label>
+                <input type="text" name="firstName"/>
+            </fieldset>
+            <fieldset>
+                <label>Last Name:</label>
+                <input type="text" name="lastName"/>
+            </fieldset>
+            <fieldset>
+                <label>Username:</label>
+                <input type="text" name="userName"/>
+            </fieldset>
+            <fieldset>
+                <label>Email:</label>
+                <input type="text" name="email"/>
+            </fieldset>
+            <fieldset>
+                <label>Password:</label>
+                <input type="password" name="password"/>
+            </fieldset>
+            <button>Sign Up</button>
         </form>
       </>
     )

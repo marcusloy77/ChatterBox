@@ -29,5 +29,5 @@
 }
 
 .chat-box2 .left {
-  color: white;
+  visibility: hidden;
 }
