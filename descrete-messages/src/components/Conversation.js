@@ -35,17 +35,17 @@ const Conversation = ({friendName, loggedInUser}) => {
       <div className='chat-box'>
         <div className="chat-box1">
           <ul className='chat-stream'>{sentMessages.map((message, index) => {
-          return <li key={index} className={message.side}>{message.message} from {message.sender}</li>
+          return <div key={index} className={message.side}>{message.message} from {message.sender}</div>
         })}</ul>
         </div>
         <div className="chat-box2">
           <ul className='chat-stream'>{sentMessages.map((message, index) => {
-          return <li key={index} className={message.side}>{message.message} from {message.sender}</li>
+          return <div key={index} className={message.side}>{message.message} from {message.sender}</div>
         })}</ul>
         </div>
       </div>
       <form action="" onSubmit={sendMessage}>
-        <input type="text" name='message' onChange={handleTypedMessages} value={typedMessage}/>
+        <input type="text" name='message' onChange={handleTypedMessages} value={typedMessage.message}/>
         <button>Send</button>
       </form>
     </section>

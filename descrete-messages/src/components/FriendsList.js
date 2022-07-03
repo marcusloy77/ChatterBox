@@ -15,13 +15,13 @@ const FriendsList = () => {
 
   return (
     <section className='friends-list'>
-      <ul> Friends List:
+      <span className='sub-title'>Friends List:</span>
         {friendsList.map((friend, index) => 
-          <li key={index}>
+          <div key={index}>
             <p>{friend}</p>
-          </li>
+          </div>
         )}
-      </ul>
+      
     </section>)
 }
 

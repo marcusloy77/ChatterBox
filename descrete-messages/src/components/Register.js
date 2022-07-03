@@ -6,7 +6,7 @@ const Register = ({loggedIn, register}) => {
   else {
     return (
       <>
-        <h3>Register</h3>
+        <h3><span className="sub-title">Register</span></h3>
         <form onSubmit={register}>
             <fieldset>
                 <label>First Name:</label>

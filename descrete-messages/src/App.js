@@ -5,9 +5,9 @@ import Logo from './components/Logo'
 import SearchBar from './components/SearchBar'
 import FriendsList from './components/FriendsList'
 import Conversation from './components/Conversation'
-import LogIn from './components/LogIn'
-import Register from './components/Register'
 import Sessions from './components/Sessions'
+import Notificaitons from './components/Notificaitons'
+
 
 function App() {
 
@@ -76,7 +76,7 @@ function App() {
     <div className="App">
       <section className='left-col'>
         <Logo/>
-        <SearchBar className='search-bar'/>
+        <SearchBar className='search-bar' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
         <FriendsList className='friends-list'/>
       </section>
       <section className='middle-col'>
@@ -86,6 +86,8 @@ function App() {
       </section>
       <section className='right-col'>
         <Sessions loggedIn={loggedIn} login={login} logout={logout} register={register}/>
+        <Notificaitons loggedIn={loggedIn} loggedInUserId={loggedInUserId}
+        />
       </section>
     </div>
   );
