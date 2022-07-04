@@ -79,7 +79,9 @@ function App() {
       <section className='left-col'>
         <Logo/>
         <SearchBar className='search-bar' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
-        <FriendsList className='friends-list'/>
+        <FriendsList 
+        className='friends-list'
+        loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
       </section>
       <section className='middle-col'>
         <Conversation 

@@ -33,7 +33,7 @@ const Notificaitons = ({loggedIn, loggedInUserId, loggedInUsername}) => {
 
   const getFriendRequests = () => {
     if (loggedIn) {
-      fetch(`/api/friends/${loggedInUserId}`)
+      fetch(`/api/friends/requests/${loggedInUserId}`)
         .then(res => res.json())
         .then(res => setFriendRequests(res.list))
     }
