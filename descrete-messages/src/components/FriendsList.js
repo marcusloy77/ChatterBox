@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
+import useInterval from './useInterval'
 
 
-
-const FriendsList = ({loggedIn, loggedInUserId, loggedInUsername}) => {
+const FriendsList = ({loggedIn, loggedInUserId, loggedInUsername, openChat}) => {
   const [friendsList, setFriendList] = useState([])
 
   const getFriendsList = () => {
@@ -16,8 +16,9 @@ const FriendsList = ({loggedIn, loggedInUserId, loggedInUsername}) => {
     }
   } 
 
-
-  useEffect(getFriendsList, [])
+  useInterval(() => {
+    getFriendsList()
+  }, 3000)
 
   return (
     <section className='friends-list'>
@@ -26,8 +27,8 @@ const FriendsList = ({loggedIn, loggedInUserId, loggedInUsername}) => {
           return (
 
           <div key={index} className="friend-elem">
-            <div>{friend.user_name}</div>
-            <button>Chat to {friend.user_name}</button>
+            <div className='friend-username'>{friend.user_name}</div>
+            <button onClick={openChat}>Chat to {friend.user_name}</button>
           </div>
           
           )

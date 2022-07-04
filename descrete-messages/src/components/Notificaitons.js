@@ -27,7 +27,7 @@ const Notificaitons = ({loggedIn, loggedInUserId, loggedInUsername}) => {
       .then(res => console.log(res))
       .then(setFriendRequests(friendRequests.filter(user => {
         return user.user_name !== friendUsername
-      })))
+      }))) 
     }
   }
 

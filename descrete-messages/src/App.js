@@ -7,7 +7,8 @@ import FriendsList from './components/FriendsList'
 import Conversation from './components/Conversation'
 import Sessions from './components/Sessions'
 import Notificaitons from './components/Notificaitons'
-
+import io from 'socket.io-client'
+const socket = io.connect('http://localhost:3002')
 
 
 
@@ -16,7 +17,7 @@ function App() {
   const [loggedInUsername, setLoggedInUser] = useState('')
   const [loggedInUserId, setLoggedInUserId] = useState('')
   const [loggedIn, setLoggedInStatus] = useState(false)
-  const friend = 'Marcus'
+  const [convoFriend, setConvoFriend] = useState('')
 
   const login = (event) => {
     event.preventDefault()
@@ -44,7 +45,7 @@ function App() {
         }
       })
   }
-
+ 
   const logout = () => {
     setLoggedInStatus(false)
     setLoggedInUser('')
@@ -54,25 +55,39 @@ function App() {
     event.preventDefault()
     const form = event.target
     const data = Object.fromEntries(new FormData(form))
-    console.log(JSON.stringify(data))
 
-    fetch('/api/users', {
-        method: 'POST',
-        headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-           },
-        body: JSON.stringify(data)
-    })
-    .then(res => res.json())
-    .then(res => {
-        if (res.error) {
-            console.log(res.error)
+    fetch(`/api/sessions/${event.target.userName.value}`)
+      .then(res => res.json())
+      .then(res => {
+        if(res.avaliable){
+          fetch('/api/users', {
+            method: 'POST',
+            headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+               },
+            body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(res => {
+            if (res.error) {
+                console.log(res.error)
+            } else {
+                console.log(res)
+            }
+        })
         } else {
-            console.log(res)
+          alert("Username Unavaliable: Please Make Another Choice")
         }
-    })
+
+
+      })
+
+    
 }
+  const openChat = (event) => {
+    setConvoFriend(event.target.closest('.friend-elem').querySelector('.friend-username').textContent)
+  }
 
   return (
     <div className="App">
@@ -81,12 +96,14 @@ function App() {
         <SearchBar className='search-bar' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
         <FriendsList 
         className='friends-list'
-        loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
+        loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername} openChat={openChat}/>
       </section>
       <section className='middle-col'>
         <Conversation 
-        friendName={friend}
-        loggedInUser={loggedInUsername}/>
+        friendName={convoFriend}
+        loggedInUser={loggedInUsername}
+        socket={socket}
+        loggedInUserId={loggedInUserId}/>
       </section>
       <section className='right-col'>
         <Sessions loggedIn={loggedIn} login={login} logout={logout} register={register}/>

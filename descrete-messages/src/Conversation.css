@@ -13,6 +13,10 @@
   border: 1px solid black;
   width: 300px;
 }
+.chat-names {
+  display: flex;
+  justify-content: space-evenly;
+}
 
 .chat {
   display: grid;

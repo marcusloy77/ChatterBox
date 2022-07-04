@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
 import '../Conversation.css'
-import io from 'socket.io-client'
-const socket = io.connect('http://localhost:3002')
 
-const Conversation = ({friendName, loggedInUser}) => {
+
+const Conversation = ({friendName, loggedInUser, loggedInUserId, socket}) => {
   //We want as display:
   //name at top
   //window with chat
@@ -12,21 +11,36 @@ const Conversation = ({friendName, loggedInUser}) => {
   const [sentMessages, addSentMessages] = useState([])
   const [state, setState] = useState({message: '', name: ''})
   const [typedMessage, setTypedMessage] = useState('')
+  const [friendId, setFriendId] = useState('')
 
   useEffect(() => {
-    socket.on('message', ({name, message}) => {
-      console.log(name, message)
+    socket.on('message', (data) => {
+      
+      console.log(data)
     })
-  })  
+  }, [socket])  
 
   const sendMessage = (event) => {
     event.preventDefault()
+    fetch(`/api/users/${friendName}`)
+        .then(res => res.json())
+        .then(res => setFriendId(res.userList[0].id))
+        .then(() => {
+          console.log(friendId)
+          if (friendId) {
+            socket.emit('message', {sender_id: loggedInUserId, sender_username: loggedInUser, reciever_id: friendId, message: event.target.message.value, room: 3})//so far this works
+
+            addSentMessages([...sentMessages, {message: event.target.message.value, sender: loggedInUser, side: 'right'}])
+            setTypedMessage('')
+          }
+          else {
+            alert('Please Select Someone To Chat To!')
+          }
+        })
+    //fetch room then put it in emit
     
-    socket.emit('message', {name: loggedInUser, message: event.target.message.value})
 
-
-    addSentMessages([...sentMessages, {message: event.target.message.value, sender: loggedInUser, side: 'right'}])
-    setTypedMessage('')
+    
 
   }
 
@@ -41,7 +55,7 @@ const Conversation = ({friendName, loggedInUser}) => {
 
   return (
     <section className='chat'>
-      <h2>{friendName}</h2>
+      <h2 className='chat-names'><span>{friendName}</span> <span>{loggedInUser}</span></h2>
       <div className='chat-box'>
         <div className="chat-box1">
           <ul className='chat-stream'>{sentMessages.map((message, index) => {
