@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import {useState, useEffect } from 'react'
 import Logo from './components/Logo'
@@ -7,6 +7,8 @@ import FriendsList from './components/FriendsList'
 import Conversation from './components/Conversation'
 import Sessions from './components/Sessions'
 import Notificaitons from './components/Notificaitons'
+
+
 
 
 function App() {
@@ -86,7 +88,7 @@ function App() {
       </section>
       <section className='right-col'>
         <Sessions loggedIn={loggedIn} login={login} logout={logout} register={register}/>
-        <Notificaitons loggedIn={loggedIn} loggedInUserId={loggedInUserId}
+        <Notificaitons loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}
         />
       </section>
     </div>
