@@ -44,7 +44,7 @@ const Notificaitons = ({loggedIn, loggedInUserId, loggedInUsername}) => {
 
   useInterval(() => {
     getFriendRequests()
-  }, 5000)
+  }, 2*5000)
 
 
   const confirmFriend = (event) => {
@@ -56,7 +56,7 @@ const Notificaitons = ({loggedIn, loggedInUserId, loggedInUsername}) => {
 
 
   return (
-  <>
+  <div className='fri-req'>
     <h3 className="sub-title">Friend Requests</h3>
     <div className="friend-reqs">
       {friendRequests.map((res, index) => {
@@ -71,7 +71,7 @@ const Notificaitons = ({loggedIn, loggedInUserId, loggedInUsername}) => {
         </div>
       })} 
     </div>
-  </>
+  </div>
   )
 }
 

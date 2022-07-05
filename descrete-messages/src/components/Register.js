@@ -1,4 +1,4 @@
-
+import Button from '@mui/material/Button'
 const Register = ({loggedIn, register}) => {
   if (loggedIn) {
     return (<></>)
@@ -6,8 +6,8 @@ const Register = ({loggedIn, register}) => {
   else {
     return (
       <>
-        <h3><span className="sub-title">Register</span></h3>
-        <form onSubmit={register}>
+        <span className="sub-title">Register</span>
+        <form className="regForm" id="reg" type='submit' onSubmit={register}>
             <fieldset>
                 <label>First Name:</label>
                 <input type="text" name="firstName"/>
@@ -28,7 +28,7 @@ const Register = ({loggedIn, register}) => {
                 <label>Password:</label>
                 <input type="password" name="password"/>
             </fieldset>
-            <button>Sign Up</button>
+            <Button variant="contained" form="reg" type='submit'>Submit</Button>
         </form>
       </>
     )

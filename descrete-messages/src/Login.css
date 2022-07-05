@@ -1,0 +1,12 @@
+.loginBox {
+  
+  z-index: 1;
+  padding-left: 10px;
+  padding-right: 10px;
+
+  text-align: center;
+}
+
+.sub-title {
+  margin-top: 0px;
+}

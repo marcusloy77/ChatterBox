@@ -22,13 +22,13 @@ const FriendsList = ({loggedIn, loggedInUserId, loggedInUsername, openChat}) => 
 
   return (
     <section className='friends-list'>
-      <span className='sub-title'>Friends List:</span>
+      <span className='sub-title'>Friends List</span>
         {friendsList.map((friend, index) => {
           return (
 
           <div key={index} className="friend-elem">
             <div className='friend-username'>{friend.user_name}</div>
-            <button onClick={openChat}>Chat to {friend.user_name}</button>
+            <button onClick={openChat}>Chat</button>
           </div>
           
           )

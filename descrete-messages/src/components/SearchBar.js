@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import '../SearchBar.css'
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField'
 
 const SearchBar = ({loggedIn, loggedInUserId, loggedInUsername}) => {
 
@@ -43,10 +45,10 @@ const SearchBar = ({loggedIn, loggedInUserId, loggedInUsername}) => {
   return (
     <>
       <section className="search-bar">
-        <form className="search-form" onSubmit={fetchSearches}>
-          <label className='sub-title'>Search? </label>
+        <form className="search-form" id='search' type='submit' onSubmit={fetchSearches}>
+          <label className='sub-title'>Find Friends </label>
           <input type="text" name='searchQuery' />
-          <button>Find Chatters!</button>
+          <Button size='small' color="secondary" className='goBtn' form="search" type='submit' variant="contained">Go</Button>
         </form>
       </section>
       <section className="search-area">

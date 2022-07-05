@@ -1,52 +1,72 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import '../Conversation.css'
+import useInterval from './useInterval'
 
 
-const Conversation = ({friendName, loggedInUser, loggedInUserId, socket}) => {
-  //We want as display:
-  //name at top
-  //window with chat
-  //input for messages at the bottom
+const Conversation = ({friendName, loggedInUser, loggedInUserId, convoFriendId}) => {
 
   const [sentMessages, addSentMessages] = useState([])
-  const [state, setState] = useState({message: '', name: ''})
   const [typedMessage, setTypedMessage] = useState('')
   const [friendId, setFriendId] = useState('')
 
-  useEffect(() => {
-    socket.on('message', (data) => {
-      
-      console.log(data)
-    })
-  }, [socket])  
-
   const sendMessage = (event) => {
     event.preventDefault()
-    fetch(`/api/users/${friendName}`)
-        .then(res => res.json())
-        .then(res => setFriendId(res.userList[0].id))
-        .then(() => {
-          console.log(friendId)
-          if (friendId) {
-            socket.emit('message', {sender_id: loggedInUserId, sender_username: loggedInUser, reciever_id: friendId, message: event.target.message.value, room: 3})//so far this works
+    let data
+    setFriendId(convoFriendId)
+    if (convoFriendId) {
+      let message = event.target.message.value
+      if (message.length > 20 ){
+        message = message.slice(0,20) + '- ' + message.slice(20)
+      }
 
-            addSentMessages([...sentMessages, {message: event.target.message.value, sender: loggedInUser, side: 'right'}])
-            setTypedMessage('')
-          }
-          else {
-            alert('Please Select Someone To Chat To!')
-          }
-        })
-    //fetch room then put it in emit
-    
+      data = {sender_id: loggedInUserId, sender_username: loggedInUser, reciever_id: convoFriendId, message: message}
 
-    
+      fetch('/api/messages/', {
+        method: 'POST',
+        headers : { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+          },
+        body: JSON.stringify(data)
+      })
+      
+
+      setTypedMessage('')
+    }
+    else {
+      alert('Please Select Someone To Chat To!')
+    }
 
   }
 
   const retrieveMessages = () => {
+    //get request, set state = get, repeat this a bunch
+    if (convoFriendId && loggedInUserId){
+    fetch(`/api/messages/id1=${loggedInUserId}&id2=${convoFriendId}`)
+      .then(res => res.json())
+      .then(res => {
+        return res.map(messageObj => {
+          if (messageObj.sender_id === loggedInUserId) {
+            messageObj['side'] = 'right'
+          }
+          else {
+            messageObj['side'] = 'left'
+          }
+          return messageObj
 
+        })
+      })
+      .then(res => {
+        console.log(res)
+        return res
+      })
+      .then(res => addSentMessages(res))
+    }
   }
+
+  useInterval(() => {
+    retrieveMessages()
+  }, 2000)
 
   const handleTypedMessages = (event) => {
     const message = event.target.value
@@ -55,20 +75,22 @@ const Conversation = ({friendName, loggedInUser, loggedInUserId, socket}) => {
 
   return (
     <section className='chat'>
-      <h2 className='chat-names'><span>{friendName}</span> <span>{loggedInUser}</span></h2>
+      
       <div className='chat-box'>
         <div className="chat-box1">
+          <div className='chat-name friend'>{friendName}</div>
           <ul className='chat-stream'>{sentMessages.map((message, index) => {
-          return <div key={index} className={message.side}>{message.message} from {message.sender}</div>
+          return <div key={index} className={`message ${message.side}`}>{message.message}</div>
         })}</ul>
         </div>
         <div className="chat-box2">
+          <div className='chat-name me'>Me</div>
           <ul className='chat-stream'>{sentMessages.map((message, index) => {
-          return <div key={index} className={message.side}>{message.message} from {message.sender}</div>
+          return <div key={index} className={`message ${message.side}`}>{message.message}</div>
         })}</ul>
         </div>
       </div>
-      <form action="" onSubmit={sendMessage}>
+      <form className='messageBox' onSubmit={sendMessage}>
         <input type="text" name='message' onChange={handleTypedMessages} value={typedMessage.message}/>
         <button>Send</button>
       </form>

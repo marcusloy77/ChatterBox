@@ -1,0 +1,13 @@
+.loginBtn {
+  width: 200px;
+  height: 75px;
+  text-align: center;
+
+}
+.registerBtn {
+  height: 35px;
+  width: 200px;
+  text-align: center;
+  margin-top: 60px;
+
+}

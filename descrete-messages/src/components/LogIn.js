@@ -1,24 +1,29 @@
-
+import '../Login.css'
+import Button from '@mui/material/Button'
 
 const LogIn = ({loggedIn, login, logout}) => {
   
   if (loggedIn) {
     return (
-      <h3 className="sub-title" onClick={logout}>Log Out</h3>
+      <div className="sub-title" onClick={logout}>Log Out</div>
     )
   }
   else {
     return(
-      <>
-        <h3><span className="sub-title">Login </span></h3>
-        <form onSubmit={login}>
-          <label htmlFor="">Username:</label>
-          <input type="text" name="userName" />
+      <div className='loginBox'>
+        <span className="sub-title">Login </span>
+        <form onSubmit={login} id="log" type='submit'> 
+          <fieldset>
+            <label htmlFor="">Username:</label>
+            <input type="text" name="userName" />
+          </fieldset>
+          <fieldset>
           <label htmlFor="">Password:</label>
           <input type="password" name="password" />
-          <button>Login</button>
+          </fieldset>
+          <Button variant="contained" form="log" type='submit'>Submit</Button>
         </form>
-      </>
+      </div>
     )
   }
 }

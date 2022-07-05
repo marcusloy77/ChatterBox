@@ -1,6 +1,7 @@
 import LogIn from './LogIn'
 import Register from './Register'
 import { useState, useEffect } from 'react'
+import '../Sessions.css'
 
 const Sessions = ({loggedIn, login, logout, register}) => {
   const [logInClicked, setLogInClicked] = useState(false)
@@ -39,8 +40,8 @@ const Sessions = ({loggedIn, login, logout, register}) => {
 
   return (
     <>
-      <div onClick={setLogInBtn}>{loginComp()}</div>
-      <div onClick={setRegisterBtn}>{registerComp()}</div>
+      <div className='loginBtn' onClick={setLogInBtn}>{loginComp()}</div>
+      <div className='registerBtn' onClick={setRegisterBtn}>{registerComp()}</div>
       
       
     </>

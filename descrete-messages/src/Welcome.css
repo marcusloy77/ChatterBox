@@ -1,0 +1,19 @@
+.welcome {
+
+  background-size:cover;
+  background-position: 0%;
+  width: 30%;
+}
+
+.sal {
+  text-align: center;
+  font-weight: bold;
+  
+}
+
+.saying {
+  text-align: center;
+  font-style: italic;
+  font-size: 26px;
+}
+

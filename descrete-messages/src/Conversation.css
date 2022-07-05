@@ -1,17 +1,39 @@
+.chat-name {
+  font-size: 28px;
+  font-weight: bold;
+  border-bottom: 1px solid black;
+}
+
+.chat-stream {
+  max-width: 150px;
+  text-align: left;
+  padding-left: 10px;
+}
+
+div .message {
+  border: 1px solid black;
+  border-radius: 30%;
+  padding: 5px 5px 5px 5px;
+  text-align: center;
+}
+
 .chat-box {
   border: 1px solid black;
-  width: 600px;
+  width: 400px;
   height: 500px;
   display: flex;
   justify-content: center;
+  overflow: hidden;
 }
 .chat-box1 {
-  border: 1px solid black;
-  width: 300px;
+  
+  width: 200px;
+  overflow: hidden;
 }
 .chat-box2 {
-  border: 1px solid black;
-  width: 300px;
+  
+  width: 200px;
+  overflow: hidden;
 }
 .chat-names {
   display: flex;
@@ -21,6 +43,13 @@
 .chat {
   display: grid;
   justify-content: center;
+  overflow: hidden;
+}
+.chat-box1 .friend {
+  background-color: rgba(255, 130, 226, 1);
+}
+.chat-box2 .me {
+  background-color: rgba(254, 215, 21, 1);
 }
 
 .right {
@@ -31,7 +60,19 @@
 .chat-box1 .right {
   visibility: hidden;
 }
+.chat-box1 .left {
+  background-color: rgba(255, 130, 226, 1);
+}
 
 .chat-box2 .left {
   visibility: hidden;
+}
+.chat-box2 .right {
+  background-color: rgba(254, 215, 21, 1);
+}
+
+.messageBox {
+  display: flex;
+  justify-content: right;
+  height: 60px;
 }

@@ -7,17 +7,19 @@ import FriendsList from './components/FriendsList'
 import Conversation from './components/Conversation'
 import Sessions from './components/Sessions'
 import Notificaitons from './components/Notificaitons'
-import io from 'socket.io-client'
-const socket = io.connect('http://localhost:3002')
-
-
+import Welcome from './components/Welcome';
+import chatterBoxImg from './images/chatter2.png'
+import salutationsImg from './images/salutations.png'
+import LogIn from './components/LogIn'
+import Register from './components/Register';
 
 function App() {
 
   const [loggedInUsername, setLoggedInUser] = useState('')
   const [loggedInUserId, setLoggedInUserId] = useState('')
   const [loggedIn, setLoggedInStatus] = useState(false)
-  const [convoFriend, setConvoFriend] = useState('')
+  const [convoFriend, setConvoFriend] = useState('User')
+  const [convoFriendId, setConvoFriendId] = useState('')
 
   const login = (event) => {
     event.preventDefault()
@@ -86,30 +88,59 @@ function App() {
     
 }
   const openChat = (event) => {
-    setConvoFriend(event.target.closest('.friend-elem').querySelector('.friend-username').textContent)
+    const friendName = event.target.closest('.friend-elem').querySelector('.friend-username').textContent
+    setConvoFriend(friendName)
+    fetch(`/api/users/getId/${friendName}`)
+        .then(res => res.json())
+        .then(res => {
+          setConvoFriendId(res.id)
+        })
+    //socket.emit('join_room', 3)
+
   }
 
   return (
-    <div className="App">
-      <section className='left-col'>
-        <Logo/>
-        <SearchBar className='search-bar' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
-        <FriendsList 
-        className='friends-list'
-        loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername} openChat={openChat}/>
-      </section>
-      <section className='middle-col'>
+    <div className="page">
+      <div className='banner'>
+      <Logo/>
+
+      <div className="chatImg">
+        <img className='chatterBoxImg' src={chatterBoxImg} alt="Chatterbox" />
+      </div>
+
+      <div className='lognreg'></div>
+      </div>
+      
+      <div className="welc-wrapper">
+        <Welcome loggedInUsername={loggedInUsername.toUpperCase()}/>
+      </div>
+      <div className="App">
+        <section className='left-col'>
+         
+          <div className='innerCols'>
+            <div className="left">
+          <SearchBar className='search-bar' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
+          <Notificaitons className='fri-req' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
+          </div>
+          <FriendsList 
+            className='friends-list'
+            loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername} openChat={openChat}/>
+          </div>
+          
+        </section>
+        <section className='right-col'>
         <Conversation 
-        friendName={convoFriend}
-        loggedInUser={loggedInUsername}
-        socket={socket}
-        loggedInUserId={loggedInUserId}/>
-      </section>
-      <section className='right-col'>
+          friendName={convoFriend}
+          loggedInUser={loggedInUsername}
+          loggedInUserId={loggedInUserId}
+          convoFriendId={convoFriendId}/>
+          
+        </section>
+        <div className="sessions">
         <Sessions loggedIn={loggedIn} login={login} logout={logout} register={register}/>
-        <Notificaitons loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}
-        />
-      </section>
+        </div>
+        
+      </div>
     </div>
   );
 }
