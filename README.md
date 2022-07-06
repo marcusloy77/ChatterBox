@@ -13,7 +13,8 @@
 <h4> Back End </h4> <p> The code I'm the most proud of in the back end was my solution to the creation of conversation tables. I created a simple protocal for the naming convention, where the user Id's within the conversation would be used in the table name, in the form conversation_id1_id2. However, this would create issues depending on who attempted to fetch the conversation, so I then simply decided whichever of the Id's were a higher number would be put first. The conversations were created whenever someone accepted a friend request. </p>
 
 <h4> Front End Code: </h4> 
-```const retrieveMessages = () => {
+```
+const retrieveMessages = () => {
     //get request, set state = get, repeat this a bunch
     if (convoFriendId && loggedInUserId){
     fetch(`/api/messages/id1=${loggedInUserId}&id2=${convoFriendId}`)
@@ -36,7 +37,7 @@
       .then(res => addSentMessages(res))
     }
   } 
-  ```
+```
   
   <h4> Back End Code: </h4> 
   ```createConversation: (id1, id2) => {
