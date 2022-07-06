@@ -50,7 +50,7 @@
         if (id1 > id2) {
           idFirst = id1
           idSecond = id2
-        } //cheeky way of making sure every reference to conversation works
+        } //cheeky way of making sure every reference to conversation work
         else {
           idFirst = id2
           idSecond = id1
