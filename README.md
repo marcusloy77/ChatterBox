@@ -14,6 +14,7 @@
 
 <h4> Front End Code: </h4> 
 ```
+
 const retrieveMessages = () => {
     //get request, set state = get, repeat this a bunch
     if (convoFriendId && loggedInUserId){
@@ -36,11 +37,14 @@ const retrieveMessages = () => {
       })
       .then(res => addSentMessages(res))
     }
-  } 
+  }
+  
 ```
   
   <h4> Back End Code: </h4> 
-  ```createConversation: (id1, id2) => {
+  ```
+  
+  createConversation: (id1, id2) => {
     let idFirst
     let idSecond
     if (id1 > id2) {
@@ -56,5 +60,6 @@ const retrieveMessages = () => {
     CREATE TABLE conversation_${idFirst}_${idSecond}(id SERIAL PRIMARY KEY, message TEXT, sender_id INTEGER, sender_username TEXT)
     `
     return db.query(sql)
-  } 
+  }
+  
   ```
