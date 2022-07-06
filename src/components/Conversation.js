@@ -15,9 +15,6 @@ const Conversation = ({friendName, loggedInUser, loggedInUserId, convoFriendId})
     setFriendId(convoFriendId)
     if (convoFriendId) {
       let message = event.target.message.value
-      if (message.length > 20 ){
-        message = message.slice(0,20) + '- ' + message.slice(20)
-      }
 
       data = {sender_id: loggedInUserId, sender_username: loggedInUser, reciever_id: convoFriendId, message: message}
 
