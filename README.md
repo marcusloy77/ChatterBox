@@ -10,7 +10,7 @@
 <h3> Code I'm Proud Of </h3>
 <h4> Front End </h4> <p> The code I'm the most proud of in the front end is my solution to the spaces between messages - After much consideration I decided to simply render the message list twice, and assign classes to the elements based on if the sender was the currently logged in user. This then allowed me to set visibility to hidden in css, creating a fairly simple to code, yet perfectly functioning, message display. The code shown is how i fetched and assigned the class names within the list </p>
 
-<h4> Back End </h4> <p> The code I'm the most proud of in the back end was my solution to the creation of conversation tables. I created a simple protocal for the naming convention, where the user Id's within the conversation would be used in the table name, in the form conversation_id1_id2. However, this would create issues depending on who attempted to fetch the conversation, so I then simply decided whichever of the Id's were a higher number would be put first. The conversations were created whenever someone accepted a friend request. </p>
+<h4> Back End </h4> <p> The code I'm the most proud of in the back end was my model solution to the creation of conversation tables. I created a simple protocal for the naming convention, where the user Id's within the conversation would be used in the table name, in the form conversation_id1_id2. However, this would create issues depending on who attempted to fetch the conversation, so I then simply decided whichever of the Id's were a higher number would be put first. The conversations were created whenever someone accepted a friend request. </p>
 
 <h4> Front End Code: </h4> 
 
