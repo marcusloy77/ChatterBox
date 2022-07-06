@@ -17,7 +17,7 @@
 
         const retrieveMessages = () => {
             //get request, set state = get, repeat this a bunch
-            if (convoFriendId && loggedInUserId){
+          if (convoFriendId && loggedInUserId){
             fetch(`/api/messages/id1=${loggedInUserId}&id2=${convoFriendId}`)
               .then(res => res.json())
               .then(res => {
