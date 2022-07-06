@@ -1,4 +1,4 @@
-<h1>ChatterBox Front End Application, found <a href='https://chatterbox-message-app.herokuapp.com/'> here </a>, backend found <a href='https://github.com/marcusloy77/ChatterBox-Backend'> here </a> </h1>
+<h1>ChatterBox Front End, Full Deployment Found <a href='https://chatterbox-message-app.herokuapp.com/'> Here </a>, Backend Found <a href='https://github.com/marcusloy77/ChatterBox-Backend'> Here </a> </h1>
 
 <h2>Tech Stack: React.js, MUI </h2>
 
