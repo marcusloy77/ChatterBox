@@ -25,12 +25,10 @@ const SearchBar = ({loggedIn, loggedInUserId, loggedInUsername}) => {
       .then(res => res.json())
       .then(res => console.log(res))
 
-
     } else {
       alert('Please Log In Or Register To Add Friends')
     }
-
-    }
+  }
 
 
   const fetchSearches = (event) => {
@@ -46,7 +44,7 @@ const SearchBar = ({loggedIn, loggedInUserId, loggedInUsername}) => {
     <>
       <section className="search-bar">
         <form className="search-form" id='search' type='submit' onSubmit={fetchSearches}>
-          <label className='sub-title'>Find Friends </label>
+          <h3 className='sub-title'>Find Friends </h3>
           <input type="text" name='searchQuery' />
           <Button size='small' color="secondary" className='goBtn' form="search" type='submit' variant="contained">Go</Button>
         </form>

@@ -44,6 +44,7 @@ div .message {
   display: grid;
   justify-content: center;
   overflow: hidden;
+  
 }
 .chat-box1 .friend {
   background-color: rgba(255, 130, 226, 1);

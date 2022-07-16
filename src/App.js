@@ -115,9 +115,7 @@ function App() {
         <Welcome loggedInUsername={loggedInUsername.toUpperCase()}/>
       </div>
       <div className="App">
-        <section className='left-col'>
-         
-          <div className='innerCols'>
+
             <div className="left">
           <SearchBar className='search-bar' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
           <Notificaitons className='fri-req' loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername}/>
@@ -125,9 +123,7 @@ function App() {
           <FriendsList 
             className='friends-list'
             loggedIn={loggedIn} loggedInUserId={loggedInUserId} loggedInUsername={loggedInUsername} openChat={openChat}/>
-          </div>
-          
-        </section>
+
         <section className='right-col'>
         <Conversation 
           friendName={convoFriend}
