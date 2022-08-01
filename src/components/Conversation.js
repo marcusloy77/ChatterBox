@@ -54,7 +54,6 @@ const Conversation = ({friendName, loggedInUser, loggedInUserId, convoFriendId})
         })
       })
       .then(res => {
-        console.log(res)
         return res
       })
       .then(res => addSentMessages(res))

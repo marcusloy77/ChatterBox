@@ -8,13 +8,19 @@
   max-width: 150px;
   text-align: left;
   padding-left: 10px;
+  display: flex;
+  flex-direction: column-reverse;
+
 }
 
 div .message {
   border: 1px solid black;
   border-radius: 30%;
   padding: 5px 5px 5px 5px;
+  margin-top: 5px;
   text-align: center;
+  
+  
 }
 
 .chat-box {
@@ -23,21 +29,24 @@ div .message {
   height: 500px;
   display: flex;
   justify-content: center;
-  overflow: hidden;
+  overflow: scroll;
 }
 .chat-box1 {
   
   width: 200px;
-  overflow: hidden;
+  
+
 }
 .chat-box2 {
   
   width: 200px;
-  overflow: hidden;
+  
+
 }
 .chat-names {
   display: flex;
   justify-content: space-evenly;
+
 }
 
 .chat {
