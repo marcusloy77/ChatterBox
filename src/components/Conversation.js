@@ -3,7 +3,7 @@ import '../Conversation.css'
 import useInterval from './useInterval'
 
 
-const Conversation = ({friendName, loggedInUser, loggedInUserId, convoFriendId}) => {
+const Conversation = ({friendName, loggedInUser, loggedInUserId, convoFriendId, scrollToBottom}) => {
 
   const [sentMessages, addSentMessages] = useState([])
   const [typedMessage, setTypedMessage] = useState('')
@@ -29,6 +29,7 @@ const Conversation = ({friendName, loggedInUser, loggedInUserId, convoFriendId})
       
 
       setTypedMessage('')
+      scrollToBottom()
     }
     else {
       alert('Please Select Someone To Chat To!')
@@ -58,21 +59,24 @@ const Conversation = ({friendName, loggedInUser, loggedInUserId, convoFriendId})
       })
       .then(res => addSentMessages(res))
     }
+    scrollToBottom()
   }
 
   useInterval(() => {
     retrieveMessages()
+    scrollToBottom()
   }, 2000)
 
   const handleTypedMessages = (event) => {
     const message = event.target.value
     setTypedMessage(message)
+    scrollToBottom()
   }
 
   return (
     <section className='chat'>
       
-      <div className='chat-box'>
+      <div className='chat-box' id='chatter-div'>
         <div className="chat-box1">
           <div className='chat-name friend'>{friendName}</div>
           <ul className='chat-stream'>{sentMessages.map((message, index) => {

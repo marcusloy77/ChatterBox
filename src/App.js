@@ -21,6 +21,11 @@ function App() {
   const [convoFriend, setConvoFriend] = useState('User')
   const [convoFriendId, setConvoFriendId] = useState('')
 
+  const scrollToBottom = () => {
+    let objDiv = document.getElementById("chatter-div");
+    objDiv.scrollTop = objDiv.scrollHeight;
+  }
+  
   const login = (event) => {
     event.preventDefault()
     const userName = event.target.userName.value
@@ -96,8 +101,10 @@ function App() {
           setConvoFriendId(res.id)
         })
     //socket.emit('join_room', 3)
-
+    scrollToBottom()
   }
+
+  
 
   return (
     <div className="page">
@@ -129,7 +136,8 @@ function App() {
           friendName={convoFriend}
           loggedInUser={loggedInUsername}
           loggedInUserId={loggedInUserId}
-          convoFriendId={convoFriendId}/>
+          convoFriendId={convoFriendId}
+          scrollToBottom={scrollToBottom}/>
           
         </section>
         <div className="sessions">
